@@ -1,0 +1,142 @@
+title PersonalBudgetingToolThis 
+
+participant client
+participant server
+
+database bankAccount
+
+note over server:starting server
+server-->bankAccount:initializing connection
+client-->server:initializing connection
+
+
+linear 
+client-->server:exit
+server-->client:stopped the connection
+
+linear 
+client-->server:register with iban
+server-->bankAccount:register account
+note over bankAccount:account registered
+linear
+bankAccount-->server:successfully/unsuccessfully registered
+server-->client:account created/try again
+
+linear 
+client-->server:register without iban
+server-->bankAccount:register account
+note over bankAccount:account registered
+linear
+bankAccount-->server:successfully/unsuccessfully registered
+server-->client:account created/try again
+
+linear 
+client-->server:login
+server-->bankAccount:send account details
+note over bankAccount:search account details
+linear 
+bankAccount-->server:successfully/unsuccessfully searched
+server-->client:logged/try again
+
+linear 
+client-->server:help
+server-->client:send help details
+
+linear 
+client-->server:addmoney
+server-->bankAccount:request update account balance
+note over bankAccount:update account balance
+linear 
+bankAccount-->server:successfully/unsuccessfully updated
+server-->client:successfully/unsuccessfully updated
+
+linear 
+client-->server:deletecard
+server-->bankAccount:request delete card
+note over bankAccount:search card to delete
+linear 
+bankAccount-->server:successfully/unsuccessfully deleted card
+server-->client:successfully/unsuccessfully deleted card
+
+linear 
+client-->server:insertcard
+server-->bankAccount:request to add a new card
+note over bankAccount:insert the card
+linear 
+bankAccount-->server:successfully/unsuccessfully inserted card
+server-->client:successfully/unsuccessfully inserted card
+
+linear 
+client-->server:inserttrans
+server-->bankAccount:request to add a new transaction for a card
+note over bankAccount:insert the transacton
+linear 
+bankAccount-->server:successfully/unsuccessfully inserted transaction
+server-->client:successfully/unsuccessfully inserted transaction
+
+linear 
+client-->server:showalltrans
+server-->bankAccount:request to show all the card's transaction
+note over bankAccount:preparing all transactions from account
+linear 
+bankAccount-->server:successfully/unsuccessfully found transactions to be showed
+server-->client:successfully/unsuccessfully found transactions to be showed
+
+linear 
+client-->server:showbalance
+server-->bankAccount:request to show a card's balance
+note over bankAccount:preparing card's balance
+linear 
+bankAccount-->server:successfully/unsuccessfully found card's balance 
+server-->client:successfully/unsuccessfully found card's balance 
+
+linear 
+client-->server:showcards
+server-->bankAccount:request to show all cards from account
+note over bankAccount:preparing all cards
+linear 
+bankAccount-->server:successfully/unsuccessfully found cards 
+server-->client:successfully/unsuccessfully found cards
+
+linear 
+client-->server:showtotalbalance
+server-->bankAccount:request to show total balance from account
+note over bankAccount:preparing total balance
+linear 
+bankAccount-->server:successfully/unsuccessfully total balance 
+server-->client:successfully/unsuccessfully total balance
+
+
+linear 
+client-->server:showtrans
+server-->bankAccount:request to show a transaction from a card
+note over bankAccount:preparing transaction to be showed
+linear 
+bankAccount-->server:successfully/unsuccessfully found transaction 
+server-->client:successfully/unsuccessfully found transaction
+
+linear 
+client-->server:save
+server-->bankAccount:request to search the most common transaction type
+note over bankAccount:searching the most common transaction type
+linear 
+bankAccount-->server:receiving the most common transaction type
+server-->client:successfully/unsuccessfully received a plan to save more money
+
+linear 
+client-->server:report
+server-->bankAccount:request to show a diagram with all the transactions
+note over bankAccount:searching all the transactions
+linear 
+bankAccount-->server:sending all the transactions
+server-->client:successfully/unsuccessfully created a diagram with all the transactions
+
+
+
+
+
+
+
+
+
+

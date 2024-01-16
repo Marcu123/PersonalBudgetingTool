@@ -1,0 +1,163 @@
+title PersonalBudgetingToolThis 
+
+participant client#lightgreen
+participant server#cyan
+
+database bankAccount#yellow
+
+note over server:starting server
+server-->bankAccount:initializing connection
+client-->server:initializing connection
+
+
+group #48a7bd register
+linear 
+client->server:register with iban
+server->bankAccount:register account
+note over bankAccount:account registered
+linear
+bankAccount-->server:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> registered
+server-->client:<color:#green>account created</color>/<color:#red>try again</color>
+
+linear 
+client->server:register without iban
+server->bankAccount:register account
+note over bankAccount:account registered
+linear
+bankAccount-->server:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> registered
+server-->client:<color:#green>account created</color>/<color:#red>try again</color>
+end
+
+group #48a7bd login
+linear 
+client->server:login
+server->bankAccount:send account details
+note over bankAccount:search account details
+linear 
+bankAccount-->server:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> searched
+server-->client:<color:#green>logged created</color>/<color:#red>try again</color>
+
+end
+group #48a7bd help
+linear 
+client->server:help
+server-->client:send help details
+end
+
+group #48a7bd addMoney
+linear 
+client->server:addmoney
+server->bankAccount:request update account balance
+note over bankAccount:update account balance
+linear 
+bankAccount-->server:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> updated
+server-->client:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> updated
+end
+
+group #48a7bd deleteCard
+linear 
+client->server:deletecard
+server->bankAccount:request delete card
+note over bankAccount:search card to delete
+linear 
+bankAccount-->server:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> deleted card
+server-->client:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> deleted card
+end
+
+group #48a7bd insertCard
+linear 
+client->server:insertcard
+server->bankAccount:request to add a new card
+note over bankAccount:insert the card
+linear 
+bankAccount-->server:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> inserted card
+server-->client:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> inserted card
+end
+
+group #48a7bd insertTrans
+linear 
+client->server:inserttrans
+server->bankAccount:request to add a new transaction for a card
+note over bankAccount:insert the transacton
+linear 
+bankAccount-->server:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> inserted transaction
+server-->client:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> inserted transaction
+end
+
+group #48a7bd showAllTrans
+linear 
+client->server:showalltrans
+server->bankAccount:request to show all the card's transaction
+note over bankAccount:preparing all transactions from account
+linear 
+bankAccount-->server:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> found transactions to be showed
+server-->client:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> found transactions to be showed
+end
+
+group #48a7bd showBalance
+linear 
+client->server:showbalance
+server->bankAccount:request to show a card's balance
+note over bankAccount:preparing card's balance
+linear 
+bankAccount-->server:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> found card's balance 
+server-->client:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> found card's balance 
+end
+
+group #48a7bd showCards
+linear 
+client->server:showcards
+server->bankAccount:request to show all cards from account
+note over bankAccount:preparing all cards
+linear 
+bankAccount-->server:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> found cards 
+server-->client:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> found cards
+end
+
+group #48a7bd showTotalBalance
+linear 
+client->server:showtotalbalance
+server->bankAccount:request to show total balance from account
+note over bankAccount:preparing total balance
+linear 
+bankAccount-->server:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> total balance 
+server-->client:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> total balance
+end
+
+group #48a7bd showTrans
+linear 
+client->server:showtrans
+server->bankAccount:request to show a transaction from a card
+note over bankAccount:preparing transaction to be showed
+linear 
+bankAccount-->server:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> found transaction 
+server-->client:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> found transaction
+end
+
+group #48a7bd save
+linear 
+client->server:save
+server->bankAccount:request to search the most common transaction type
+note over bankAccount:searching the most common transaction type
+linear 
+bankAccount-->server:receiving the most common transaction type
+server-->client:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> received a plan to save more money
+end
+
+group #48a7bd report
+linear 
+client->server:report
+server->bankAccount:request to show a diagram with all the transactions
+note over bankAccount:searching all the transactions
+linear 
+bankAccount-->server:sending all the transactions
+server-->client:<color:#green>successfully</color>/<color:#red>unsuccessfully</color> created a diagram with all the transactions
+end
+
+group #48a7bd exit
+linear 
+client->server:exit
+server-->client:stopped the connection
+destroy client
+end
+
